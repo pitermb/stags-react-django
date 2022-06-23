@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "start": "react-scripts start",
     "dev": "vite",
     "build": "rm -rf ../backend/build && react-scripts build && cp -r build ../backend/build && rm -rf build",
     "preview": "vite preview"

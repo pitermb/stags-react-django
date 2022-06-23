@@ -35,14 +35,14 @@ export function Login() {
   const [values, setValues] = useState();
   const navigate = useNavigate();
 
-  function onChange(e: { target: { value: any; name: any } }) {
+  function onChange(e: { target: { value: string; name: string } }) {
     const { value, name } = e.target;
   }
 
   function onSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
 
-    return navigate("/");
+    //return navigate("/");
     setOpen(true);
   }
 
