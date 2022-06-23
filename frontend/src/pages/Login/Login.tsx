@@ -26,8 +26,9 @@ type AlertInterface = {
   sx: { width: string };
 }
 
+const ref = React.createRef();
 const Alert = React.forwardRef(function Alert(props: any, ref: any) {
-  return <MuiAlert elevation={6} key={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export function Login() {
@@ -39,7 +40,7 @@ export function Login() {
     const { value, name } = e.target;
   }
 
-  function onSubmit(e: { preventDefault: () => void }) {
+  function onSubmit(e: any) {
     e.preventDefault();
 
     //return navigate("/");
@@ -72,7 +73,7 @@ export function Login() {
           <Typography component="h1" variant="h4">
             People's List
           </Typography>
-          <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -110,6 +111,7 @@ export function Login() {
                 onClose={handleClose}
                 severity="error"
                 sx={{ width: "100%" }}
+                ref={ref}
               >
                 Acesso negado! Usuario ou senha invalido.
               </Alert>
