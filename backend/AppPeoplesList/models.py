@@ -11,16 +11,13 @@ class Person(models.Model):
     age = models.IntegerField()
     peso = models.DecimalField(max_digits=5, decimal_places=2)
     altura = models.IntegerField()
-    imc = models.DecimalField(max_digits=5, decimal_places=2)
+
+    @property
+    def imc(self):
+        return self.peso / (self.altura * self.altura)
 
     class Meta:
         ordering = ['-name']
-
-    def save(self, *args, **kwargs):
-        self.imc = 0
-        if hasattr(self, 'peso') and hasattr(self, 'altura'):
-            self.imc = (self.altura * self.altura) / self.peso
-        return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('model-detail-view', args=[str(self.id_person)])
