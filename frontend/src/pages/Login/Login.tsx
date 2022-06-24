@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   Avatar,
   Button,
@@ -19,19 +21,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const theme = createTheme();
 
-type AlertInterface = {
-  children: string;
-  onClose: (event: any, reason: string) => void;
-  severity: string;
-  sx: { width: string };
-}
-
 const ref = React.createRef();
 const Alert = React.forwardRef(function Alert(props: any, ref: any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export function Login() {
+  const url = "http://localhost:8000/api/person";
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState();
   const navigate = useNavigate();
@@ -43,6 +39,9 @@ export function Login() {
   function onSubmit(e: any) {
     e.preventDefault();
 
+    axios.get(url)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
     //return navigate("/");
     setOpen(true);
   }
@@ -118,8 +117,8 @@ export function Login() {
             </Snackbar>
             <Grid container>
               <Grid item xs>
-                <LinkHref href="#" variant="body2">
-                  Esqueceu a senha?
+                <LinkHref variant="body2">
+                  <Link to="/register">Não está registrado? Clique aqui!</Link>
                 </LinkHref>
               </Grid>
             </Grid>
