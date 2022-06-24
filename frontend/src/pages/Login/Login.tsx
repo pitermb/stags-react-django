@@ -15,19 +15,21 @@ import {
   Container,
   Snackbar,
 } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { customAxios } from "../../api/customAxios";
 
 const theme = createTheme();
 
 const ref = React.createRef();
-const Alert = React.forwardRef(function Alert(props: any, ref: any) {
+const Alert = React.forwardRef(function Alert(props: AlertProps, ref: any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+const superuser = { username: "admin", password: "admin" };
+
 export function Login() {
-  const url = "http://localhost:8000/api/person/";
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState();
   const navigate = useNavigate();
@@ -36,22 +38,20 @@ export function Login() {
     const { value, name } = e.target;
   }
 
-  function onSubmit(e: any) {
+  async function onSubmit(e: any) {
     e.preventDefault();
 
-    axios.get(url)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+    try {
+      const { data: token } = await customAxios.post(`token/`, {...superuser,});
+
+      const { data: DataPerson } = await customAxios.get(`api/person/`, {
+        headers: { Authorization: "Bearer " + token.access },
+      });
+    } catch {
+      alert("Deu ruim");
+    }
     //return navigate("/");
     setOpen(true);
-  }
-
-  function handleClose(event: any, reason: string) {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
   }
 
   return (
@@ -105,9 +105,9 @@ export function Login() {
             >
               Realizar Login
             </Button>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={open} autoHideDuration={6000}>
               <Alert
-                onClose={handleClose}
+                onClose={() => setOpen(false)}
                 severity="error"
                 sx={{ width: "100%" }}
                 ref={ref}
@@ -117,9 +117,7 @@ export function Login() {
             </Snackbar>
             <Grid container>
               <Grid item xs>
-                <LinkHref variant="body2">
-                  <Link to="/register">Não está registrado? Clique aqui!</Link>
-                </LinkHref>
+                <Link to="/register">Não está registrado? Clique aqui!</Link>
               </Grid>
             </Grid>
           </Box>
