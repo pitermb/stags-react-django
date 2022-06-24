@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from rest_framework import mixins, generics, permissions
+from rest_framework import generics, permissions
 from .models import Person
 from .serializers import PersonSerializer
 
