@@ -10,7 +10,7 @@ class Person(models.Model):
     password = models.CharField(max_length=16, null=True)
     age = models.IntegerField()
     peso = models.DecimalField(max_digits=5, decimal_places=2)
-    altura = models.IntegerField()
+    altura = models.DecimalField(max_digits=3, decimal_places=2)
 
     @property
     def imc(self):
