@@ -27,7 +27,7 @@ const Alert = React.forwardRef(function Alert(props: any, ref: any) {
 });
 
 export function Login() {
-  const url = "http://localhost:8000/api/person";
+  const url = "http://localhost:8000/api/person/";
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState();
   const navigate = useNavigate();

@@ -16,6 +16,12 @@ class Person(models.Model):
     class Meta:
         ordering = ['-name']
 
+    def save(self, *args, **kwargs):
+        self.imc = 0
+        if hasattr(self, 'peso') and hasattr(self, 'altura'):
+            self.imc = (self.altura * self.altura) / self.peso
+        return super().save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('model-detail-view', args=[str(self.id_person)])
 
