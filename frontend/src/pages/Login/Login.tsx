@@ -1,14 +1,11 @@
-import * as React from "react";
-import { useState } from "react";
+import { FormEvent, useState, createRef, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link as LinkHref,
   Grid,
   Box,
   Typography,
@@ -22,8 +19,8 @@ import { customAxios } from "../../api/customAxios";
 
 const theme = createTheme();
 
-const ref = React.createRef();
-const Alert = React.forwardRef(function Alert(props: AlertProps, ref: any) {
+const ref = createRef();
+const Alert = forwardRef(function Alert(props: AlertProps, ref: any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -38,8 +35,8 @@ export function Login() {
     const { value, name } = e.target;
   }
 
-  async function onSubmit(e: any) {
-    e.preventDefault();
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
     try {
       const { data: token } = await customAxios.post(`token/`, {...superuser,});
@@ -47,9 +44,12 @@ export function Login() {
       const { data: DataPerson } = await customAxios.get(`api/person/`, {
         headers: { Authorization: "Bearer " + token.access },
       });
+      
+      console.log(DataPerson);
     } catch {
       alert("Deu ruim");
     }
+    
     //return navigate("/");
     setOpen(true);
   }
