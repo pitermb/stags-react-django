@@ -1,5 +1,5 @@
 import { FormEvent, useState, createRef, forwardRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   Avatar,
@@ -26,32 +26,44 @@ const Alert = forwardRef(function Alert(props: AlertProps, ref: any) {
 
 const superuser = { username: "admin", password: "admin" };
 
-export function Login() {
+export function Login(props: any) {
   const [open, setOpen] = useState(false);
-  const [values, setValues] = useState();
+  const InitialState = { user: "", password: "" };
+  const [state, setState] = useState(InitialState);
   const navigate = useNavigate();
+  let { personLogged } = useParams();
 
   function onChange(e: { target: { value: string; name: string } }) {
     const { value, name } = e.target;
+    setState({
+      ...state,
+      [name]: value,
+    });
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
-      const { data: token } = await customAxios.post(`token/`, {...superuser,});
+      const { data: token } = await customAxios.post(`token/`, {
+        ...superuser,
+      });
 
       const { data: DataPerson } = await customAxios.get(`api/person/`, {
         headers: { Authorization: "Bearer " + token.access },
       });
-      
-      console.log(DataPerson);
+
+      DataPerson.filter((person: any) => {
+        if (person.name === state.user) {
+          personLogged = DataPerson;
+          return navigate("/home");
+        } else {
+          setOpen(true);
+        }
+      });
     } catch {
       alert("Deu ruim");
     }
-    
-    //return navigate("/");
-    setOpen(true);
   }
 
   return (
@@ -81,9 +93,8 @@ export function Login() {
               label="User"
               id="user"
               autoComplete="current-user"
-              autoFocus
               onChange={onChange}
-              value={values}
+              value={state.user}
             />
             <TextField
               margin="normal"
@@ -95,7 +106,7 @@ export function Login() {
               autoComplete="current-password"
               type="password"
               onChange={onChange}
-              value={values}
+              value={state.password}
             />
             <Button
               type="submit"

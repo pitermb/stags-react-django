@@ -1,7 +1,7 @@
-export function Home() {
+export function Home(props: any) {
   return (
     <div>
-      <h1>Ola mundo</h1>
+      <h1>Ola ${props.user}</h1>
     </div>
   );
 }
