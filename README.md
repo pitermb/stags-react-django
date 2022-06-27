@@ -21,8 +21,8 @@
  - [x] - Executar build com React Router
  - [x] - Montar a tela Login com MaterialUi
  - [x] - Configurar o npm run start e arquivos do projeto
- - [] - Criar uma auth para o projeto
- - [] - Configurar a chamada de API
+ - [x] - Criar uma auth para o projeto
+ - [x] - Configurar a chamada de API
  - [] - Mostrar o responseData na home
  - [] - Refazer a tela Home com MaterialUi
  - [] - Montar a tela de cadastro de usuario com MaterialUi
