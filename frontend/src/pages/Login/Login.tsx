@@ -1,40 +1,41 @@
-import { FormEvent, useState, createRef, forwardRef } from "react";
+import { FormEvent, useState, createRef, forwardRef, ChangeEvent, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
   Box,
-  Typography,
+  Button,
   Container,
+  CssBaseline,
+  Grid,
   Snackbar,
+  TextField,
+  Typography,
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { customAxios } from "../../api/customAxios";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const theme = createTheme();
 
 const ref = createRef();
-const Alert = forwardRef(function Alert(props: AlertProps, ref: any) {
+const Alert = forwardRef<unknown, AlertProps>((props: AlertProps, ref: any) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const superuser = { username: "admin", password: "admin" };
 
-export function Login(props: any) {
+export function Login() {
   const [open, setOpen] = useState(false);
   const InitialState = { user: "", password: "" };
   const [state, setState] = useState(InitialState);
   const navigate = useNavigate();
-  let { personLogged } = useParams();
+  let personLogged = useParams();
+  const auth = useContext(AuthContext);
 
-  function onChange(e: { target: { value: string; name: string } }) {
-    const { value, name } = e.target;
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
+    const { value, name } = event.target;
     setState({
       ...state,
       [name]: value,
@@ -44,25 +45,11 @@ export function Login(props: any) {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    try {
-      const { data: token } = await customAxios.post(`token/`, {
-        ...superuser,
-      });
-
-      const { data: DataPerson } = await customAxios.get(`api/person/`, {
-        headers: { Authorization: "Bearer " + token.access },
-      });
-
-      DataPerson.filter((person: any) => {
-        if (person.name === state.user) {
-          personLogged = DataPerson;
-          return navigate("/home");
-        } else {
-          setOpen(true);
-        }
-      });
-    } catch {
-      alert("Deu ruim");
+    const isLogged = await auth.signin(state.user, state.password);
+    if (isLogged) {
+      navigate('/home')
+    } else {
+      setOpen(true)
     }
   }
 
