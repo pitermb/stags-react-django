@@ -3,12 +3,12 @@ import { AuthContext } from "../../contexts/auth/AuthContext";
 
 
 export function Home() {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const auth = useContext(AuthContext);
+  console.log('data home ' + auth);
 
   return (
     <div>
-      <h1>Ola </h1>
+      <h1>Ola {auth.user?.name}</h1>
     </div>
   );
 }
