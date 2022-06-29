@@ -45,7 +45,6 @@ export function Header() {
 
   const handleSettingMenu = (event: MouseEvent<HTMLElement>) => {
     const target = event.currentTarget.textContent;
-    console.log(target);
 
     if (target === "Logout") {
       auth.logout();
