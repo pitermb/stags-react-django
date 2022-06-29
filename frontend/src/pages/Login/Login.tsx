@@ -1,5 +1,12 @@
-import { FormEvent, useState, createRef, forwardRef, ChangeEvent, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  FormEvent,
+  useState,
+  createRef,
+  forwardRef,
+  ChangeEvent,
+  useContext,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   Avatar,
@@ -24,14 +31,11 @@ const Alert = forwardRef<unknown, AlertProps>((props: AlertProps, ref: any) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const superuser = { username: "admin", password: "admin" };
-
 export function Login() {
   const [open, setOpen] = useState(false);
   const InitialState = { user: "", password: "" };
   const [state, setState] = useState(InitialState);
   const navigate = useNavigate();
-  let personLogged = useParams();
   const auth = useContext(AuthContext);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
@@ -47,9 +51,9 @@ export function Login() {
 
     const isLogged = await auth.signin(state.user, state.password);
     if (isLogged) {
-      navigate('/home')
+      navigate("/home");
     } else {
-      setOpen(true)
+      setOpen(true);
     }
   }
 
@@ -69,7 +73,7 @@ export function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h4">
-            People's List
+            Body Mass Index
           </Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
