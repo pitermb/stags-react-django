@@ -26,20 +26,20 @@
  - [x] - Configurar a auth depois de login
  - [x] - Capturar user logged
  - [x] - Mostrar o responseData na home
- - [] - Refazer a tela Home com MaterialUi
+ - [x] - Criar o component Header da aplicação
+ - [] - Configurar o component Header da aplicação
  - [] - Montar a tela de cadastro de usuario com MaterialUi
  - [] - Montar a tela de edição de usuario com MaterialUi
- - [] - Montar a função de exclusão com select
+ - [] - Refazer a tela Home com MaterialUi
+ - [] - 
 
  - sem mais ideias até o momento.
 
- - [] - 
-
 ## Tecnologias usadas até o momento
 
- - ReactJS
  - Django Rest Framework
- - Typescript
+ - ReactJS
+ - TypeScript
  - JavaScript
  - MaterialUi
  - React Router

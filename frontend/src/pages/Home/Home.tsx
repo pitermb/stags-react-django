@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 
 
@@ -7,7 +8,7 @@ export function Home() {
 
   return (
     <div>
-      <h1>Ola {auth.user?.name}</h1>
+      {<Header/>}
     </div>
   );
 }
