@@ -27,7 +27,7 @@
  - [x] - Capturar user logged
  - [x] - Mostrar o responseData na home
  - [x] - Criar o component Header da aplicação
- - [] - Configurar o component Header da aplicação
+ - [x] - Configurar o component Header da aplicação
  - [] - Montar a tela de cadastro de usuario com MaterialUi
  - [] - Montar a tela de edição de usuario com MaterialUi
  - [] - Refazer a tela Home com MaterialUi
