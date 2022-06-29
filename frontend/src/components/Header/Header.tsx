@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
+import ScaleIcon from "@mui/icons-material/Scale";
 
 import { useState, MouseEvent } from "react";
 import { useContext } from "react";
@@ -60,7 +60,7 @@ export function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <ScaleIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -76,7 +76,7 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            BODY MASS INDEX
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -115,7 +115,7 @@ export function Header() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <ScaleIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -132,7 +132,7 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            BODY MASS INDEX
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (

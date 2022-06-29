@@ -27,7 +27,7 @@ export const useApi = () => ({
       return personLogged;
     }
   },
-  signin: async (name: string, password: string) => {
+  signin: async (user: string, password: string) => {
     try {
       const { data: token } = await api.post(`/token/`, {
         ...superuser,
@@ -38,7 +38,7 @@ export const useApi = () => ({
       let tokenLogged = token.access;
       let personLogged;
       DataPerson.filter((person: any) => {
-        if (person.name === name && person.password === password) {
+        if (person.user === user && person.password === password) {
           personLogged = person;
         }
       });

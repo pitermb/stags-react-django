@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import ScaleIcon from "@mui/icons-material/Scale";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 
 const theme = createTheme();
@@ -70,10 +70,10 @@ export function Login() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            <ScaleIcon />
           </Avatar>
-          <Typography component="h1" variant="h3">
-            Body Mass Index
+          <Typography component="h1" variant="h4" sx={{ mt: 1 }}>
+            BODY MASS INDEX
           </Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
