@@ -1,4 +1,3 @@
-import { useState, MouseEvent } from "react";
 import {
   AppBar,
   Box,
@@ -15,15 +14,19 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 
+import { useState, MouseEvent } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home", "Dashboard"];
+const settings = ["Perfil", "Logout"];
 
 export function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -39,7 +42,19 @@ export function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const auth = useContext(AuthContext);
+
+  const handleSettingMenu = (event: MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget.textContent;
+    console.log(target);
+
+    if (target === "Logout") {
+      auth.logout();
+    }
+
+    if (target === "Perfil") {
+      navigate("/profile");
+    }
+  };
 
   return (
     <AppBar position="static">
@@ -154,7 +169,7 @@ export function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleSettingMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

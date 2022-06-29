@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const logout = () => {
     localStorage.clear();
     setUser(null);
+    navigate("/");
   };
 
   const setTokenAndUser = (token: string, user: User) => {
