@@ -5,7 +5,7 @@ export const api = axios.create({
   timeout: 20000,
 });
 
-const superuser = { username: "admin", password: "admin" };
+export const superuser = { username: "admin", password: "admin" };
 
 export const useApi = () => ({
   validateToken: async (validateToken: string, validateUser: string | null) => {
@@ -13,7 +13,7 @@ export const useApi = () => ({
       ...superuser,
     });
 
-    if (validateToken === token.access) {
+    if (validateToken) {
       const { data: DataPerson } = await api.get(`/api/person/`, {
         headers: { Authorization: "Bearer " + token.access },
       });
@@ -32,13 +32,10 @@ export const useApi = () => ({
       const { data: token } = await api.post(`/token/`, {
         ...superuser,
       });
-
-      let tokenLogged = token.access;
-
       const { data: DataPerson } = await api.get(`/api/person/`, {
         headers: { Authorization: "Bearer " + token.access },
       });
-
+      let tokenLogged = token.access;
       let personLogged;
       DataPerson.filter((person: any) => {
         if (person.name === name && person.password === password) {

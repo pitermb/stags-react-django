@@ -63,7 +63,7 @@ export function Login() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 28,
+            marginTop: 20,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -72,7 +72,7 @@ export function Login() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h4">
+          <Typography component="h1" variant="h3">
             Body Mass Index
           </Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
@@ -119,7 +119,7 @@ export function Login() {
             </Snackbar>
             <Grid container>
               <Grid item xs>
-                <Link to="/register">Não está registrado? Clique aqui!</Link>
+                <Link to="/register">Não está registrado?</Link>
               </Grid>
             </Grid>
           </Box>

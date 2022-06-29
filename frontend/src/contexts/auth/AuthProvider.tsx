@@ -16,13 +16,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
       if (storageData) {
         const data = await api.validateToken(storageData, storageUser);
-        console.log('data authprovider ' + data);
         if (data) {
           setUser(data);
-          console.log("setuser effect" + user);
           return navigate("/home");
         } else {
-          console.log("setuser effect else" + user);
           return navigate("/");
         }
       }
@@ -45,11 +42,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   const logout = () => {
+    localStorage.clear();
     setUser(null);
   };
 
   const setTokenAndUser = (token: string, user: User) => {
-    console.log(token)
     localStorage.setItem("authToken", token);
     localStorage.setItem("lastUserLogged", user.id_person);
   };
