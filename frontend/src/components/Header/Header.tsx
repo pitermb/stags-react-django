@@ -18,6 +18,7 @@ import { useState, MouseEvent } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const pages = ["Home", "Dashboard"];
 const settings = ["Perfil", "Logout"];
@@ -64,7 +65,6 @@ export function Header() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -75,7 +75,7 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            BODY MASS INDEX
+            <Link to="/home">BODY MASS INDEX</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -119,7 +119,6 @@ export function Header() {
             variant="h5"
             noWrap
             component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -131,7 +130,7 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            BODY MASS INDEX
+            <Link to="/home">BODY MASS INDEX</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
