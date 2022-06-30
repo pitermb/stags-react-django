@@ -36,7 +36,23 @@ export function Header() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleSettingNavMenu = (event: MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget.textContent;
+
+    if (target === "Home") {
+      navigate("/home");
+    }
+
+    if (target === "Dashboard") {
+      navigate("/dashboard");
+    }
+
+    if (target === " ") {
+        setAnchorElNav(null);
+    }
+  };
+
+  const handleCloseNavMenuuu = () => {
     setAnchorElNav(null);
   };
 
@@ -66,7 +82,7 @@ export function Header() {
             noWrap
             component="span"
             sx={{
-              mr: 2,
+              mr: 0,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
@@ -76,7 +92,7 @@ export function Header() {
             }}
           >
             <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
-              BODY MASS INDEX
+              BODY MASS INDEX |
             </Link>
           </Typography>
 
@@ -104,13 +120,13 @@ export function Header() {
                 horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={handleCloseNavMenuuu}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleSettingNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -122,7 +138,7 @@ export function Header() {
             noWrap
             component="span"
             sx={{
-              mr: 2,
+              mr: 0,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
@@ -140,18 +156,33 @@ export function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={handleSettingNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-
+          <Typography
+            variant="h6"
+            noWrap
+            component="span"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            OLÁ, {auth.user?.name.toUpperCase()}
+          </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={auth.user?.image} />
               </IconButton>
             </Tooltip>
             <Menu
