@@ -46,39 +46,39 @@ export function Register() {
     image: "",
   };
   const [state, setState] = useState(InitialState);
-  const [open, setOpen] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
     if (name === "image") {
-      const valueImage = value.split("\\");
-      console.log(valueImage)
+      const valueImage = event.target.value.split("\\");
       const filename = valueImage[2];
-      console.log(filename)
       setState({
         ...state,
         [name]: filename,
       });
+      setChecked(true);
+    } else {
+      setState({
+        ...state,
+        [name]: value,
+      });
     }
-    setState({
-      ...state,
-      [name]: value,
-    });
-    console.log(state);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const isRegister = await auth.signin(state.user, state.password);
+    console.log(state)
+    /* const isRegister = await auth.signin(state.user, state.password);
     if (isRegister) {
       navigate("/");
     } else {
       setOpen(true);
-    }
+    } */
   }
   return (
     <ThemeProvider theme={theme}>
