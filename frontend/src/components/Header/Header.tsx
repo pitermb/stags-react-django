@@ -47,17 +47,9 @@ export function Header() {
       navigate("/dashboard");
     }
 
-    if (target === " ") {
+    if (target === "") {
         setAnchorElNav(null);
     }
-  };
-
-  const handleCloseNavMenuuu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const handleSettingMenu = (event: MouseEvent<HTMLElement>) => {
@@ -69,6 +61,10 @@ export function Header() {
 
     if (target === "Perfil") {
       navigate("/profile");
+    }
+
+    if (target === "") {
+        setAnchorElUser(null);
     }
   };
 
@@ -120,7 +116,7 @@ export function Header() {
                 horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenuuu}
+              onClose={handleSettingNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
@@ -199,7 +195,7 @@ export function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={handleSettingMenu}
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleSettingMenu}>
