@@ -81,7 +81,7 @@ export function Login() {
               required
               fullWidth
               name="user"
-              label="User"
+              label="Username"
               id="user"
               autoComplete="current-user"
               onChange={onChange}
@@ -119,7 +119,11 @@ export function Login() {
             </Snackbar>
             <Grid container>
               <Grid item xs>
-                <Link to="/register">Não está registrado?</Link>
+                <Button variant="outlined" size="small">
+                  <Link to="/register" style={{ textDecoration: "none" }}>
+                    Não está registrado?
+                  </Link>
+                </Button>
               </Grid>
             </Grid>
           </Box>
