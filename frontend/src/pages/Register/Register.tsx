@@ -53,10 +53,21 @@ export function Register() {
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
+    if (name === "image") {
+      const valueImage = value.split("\\");
+      console.log(valueImage)
+      const filename = valueImage[2];
+      console.log(filename)
+      setState({
+        ...state,
+        [name]: filename,
+      });
+    }
     setState({
       ...state,
       [name]: value,
     });
+    console.log(state);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -162,14 +173,15 @@ export function Register() {
                 <Input
                   accept="image/*"
                   id="contained-button-file"
+                  name="image"
                   multiple
                   type="file"
+                  onChange={onChange}
                 />
                 <Button
                   variant="outlined"
                   component="span"
                   size="small"
-                  onClick={(e: any)=> console.log(e)}
                   sx={{ ml: 1, fontSize: 15 }}
                 >
                   Upload

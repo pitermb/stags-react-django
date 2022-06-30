@@ -3,8 +3,8 @@ from uuid import uuid4
 from django.urls import reverse
 
 
-def upload_image_book(istance, filename):
-    return f"{istance.id_person}-{filename}"
+def upload_image_book(instance, filename):
+    return f"{instance.id_person}-{filename}"
 
 
 class Person(models.Model):
