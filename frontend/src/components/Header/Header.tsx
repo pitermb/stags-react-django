@@ -64,7 +64,7 @@ export function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
+            component="span"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -75,7 +75,9 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            <Link to="/home">BODY MASS INDEX</Link>
+            <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+              BODY MASS INDEX
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -118,7 +120,7 @@ export function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            component="span"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -130,7 +132,9 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            <Link to="/home">BODY MASS INDEX</Link>
+            <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+              BODY MASS INDEX
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
