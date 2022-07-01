@@ -1,11 +1,11 @@
 export type User = {
-  id_person: null | string;
+  id_person: string;
   user: string;
   name: string;
   password: string;
-  age: string;
+  age: number;
   peso: string;
   altura: string;
-  imc: null | string;
-  image: null | {filecontent: string, filename: string};
+  imc: number;
+  image: string | {filecontent: string, filename: string};
 };

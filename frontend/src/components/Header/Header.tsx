@@ -28,6 +28,7 @@ export function Header() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const profileImage = auth.user?.image as string
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -178,7 +179,7 @@ export function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" /* src={auth.user?.image} */ />
+                <Avatar alt="Remy Sharp" src={profileImage} />
               </IconButton>
             </Tooltip>
             <Menu

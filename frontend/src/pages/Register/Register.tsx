@@ -24,7 +24,7 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
-import { User } from "../../types/User";
+import { UserRegister } from "../../types/UserRegister";
 import Base64 from "../../utils/Base64";
 
 const theme = createTheme();
@@ -39,17 +39,15 @@ const Input = styled("input")({
 
 export function Register() {
   const InitialState = {
-    id_person: null,
     user: "",
-    password: "",
     name: "",
+    password: "",
     age: "",
     peso: "",
     altura: "",
-    imc: null,
     image: null,
   };
-  const [state, setState] = useState<User>(InitialState);
+  const [state, setState] = useState<UserRegister>(InitialState);
   const [open, setOpen] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
   const navigate = useNavigate();
