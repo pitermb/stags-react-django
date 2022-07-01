@@ -29,6 +29,7 @@ export function Header() {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const profileImage = auth.user?.image as string
+  const profileName = auth.user?.name.toUpperCase()
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -174,7 +175,7 @@ export function Header() {
               textDecoration: "none",
             }}
           >
-            OLÁ, {auth.user?.name.toUpperCase()}
+            OLÁ, {profileName}
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

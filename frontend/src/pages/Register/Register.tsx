@@ -55,7 +55,6 @@ export function Register() {
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
-
     setState({
       ...state,
       [name]: value,
@@ -64,20 +63,15 @@ export function Register() {
 
   async function onChangeImage(event: ChangeEvent<HTMLInputElement>) {
     const filesList = event.target?.files || null;
-
     if (!filesList) {
       return false;
     }
-
     const [file] = filesList;
-
     const base64Data = await Base64.encode(file);
-
     setState({
       ...state,
       image: { filecontent: base64Data, filename: file.name },
     });
-
     setChecked(true);
   }
 
@@ -90,6 +84,7 @@ export function Register() {
       setOpen(true);
     }
   }
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -215,7 +210,7 @@ export function Register() {
                 sx={{ width: "100%" }}
                 ref={ref}
               >
-                Acesso negado! Usuario ou senha invalido.
+                Cadastro negado! Informações invalidas.
               </Alert>
             </Snackbar>
             <Grid container>
