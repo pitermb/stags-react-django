@@ -83,14 +83,12 @@ export function Register() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    console.log(state);
-    /* const isRegister = await auth.signin(state.user, state.password);
+    const isRegister = await auth.register(state);
     if (isRegister) {
       navigate("/");
     } else {
       setOpen(true);
-    } */
+    }
   }
   return (
     <ThemeProvider theme={theme}>

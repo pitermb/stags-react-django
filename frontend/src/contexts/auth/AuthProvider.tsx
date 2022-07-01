@@ -42,19 +42,23 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     return false;
   };
 
+  const setTokenAndUser = (token: string, user: User) => {
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("lastUserLogged", user.id_person);
+  };
+
   const logout = () => {
     localStorage.clear();
     setUser(null);
     navigate("/");
   };
 
-  const setTokenAndUser = (token: string, user: User) => {
-    localStorage.setItem("authToken", token);
-    localStorage.setItem("lastUserLogged", user.id_person);
-  };
-
-  const register = (user: UserRegister) => {
-    return true;
+  const register = async (user: UserRegister) => {
+    const data = await api.register(user);
+    if (data) {
+      return true;
+    }
+    return false;
   };
 
   return (

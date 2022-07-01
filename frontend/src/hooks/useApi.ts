@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UserRegister } from "../types/UserRegister";
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_API,
@@ -47,5 +48,20 @@ export const useApi = () => ({
       alert("Deu ruim na requisição...");
     }
   },
-  logout: async () => {},
+  register: async (user: UserRegister) => {
+    try {
+      const { data: token } = await api.post(`/token/`, {
+        ...superuser,
+      });
+      await api.post(`/api/person/`, user, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token.access,
+        },
+      });
+      return true;
+    } catch {
+      alert("Deu ruim na requisição...");
+    }
+  },
 });
