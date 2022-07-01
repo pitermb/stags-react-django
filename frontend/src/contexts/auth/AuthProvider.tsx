@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../../hooks/useApi";
 import { User } from "../../types/User";
+import { UserRegister } from "../../types/UserRegister";
 import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
@@ -50,6 +51,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const setTokenAndUser = (token: string, user: User) => {
     localStorage.setItem("authToken", token);
     localStorage.setItem("lastUserLogged", user.id_person);
+  };
+
+  const register = (user: UserRegister) => {
+    return true;
   };
 
   return (
