@@ -24,6 +24,8 @@ import ScaleIcon from "@mui/icons-material/Scale";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
+import { User } from "../../types/User";
+import Base64 from "../../utils/Base64";
 
 const theme = createTheme();
 const ref = createRef();
@@ -37,15 +39,17 @@ const Input = styled("input")({
 
 export function Register() {
   const InitialState = {
+    id_person: null,
     user: "",
     password: "",
     name: "",
     age: "",
     peso: "",
     altura: "",
-    image: "",
+    imc: null,
+    image: null,
   };
-  const [state, setState] = useState(InitialState);
+  const [state, setState] = useState<User>(InitialState);
   const [open, setOpen] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -53,26 +57,36 @@ export function Register() {
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
-    if (name === "image") {
-      const valueImage = event.target.value.split("\\");
-      const filename = valueImage[2];
-      setState({
-        ...state,
-        [name]: filename,
-      });
-      setChecked(true);
-    } else {
-      setState({
-        ...state,
-        [name]: value,
-      });
+
+    setState({
+      ...state,
+      [name]: value,
+    });
+  }
+
+  async function onChangeImage(event: ChangeEvent<HTMLInputElement>) {
+    const filesList = event.target?.files || null;
+
+    if (!filesList) {
+      return false;
     }
+
+    const [file] = filesList;
+
+    const base64Data = await Base64.encode(file);
+
+    setState({
+      ...state,
+      image: { filecontent: base64Data, filename: file.name },
+    });
+
+    setChecked(true);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log(state)
+    console.log(state);
     /* const isRegister = await auth.signin(state.user, state.password);
     if (isRegister) {
       navigate("/");
@@ -176,7 +190,7 @@ export function Register() {
                   name="image"
                   multiple
                   type="file"
-                  onChange={onChange}
+                  onChange={onChangeImage}
                 />
                 <Button
                   variant="outlined"
