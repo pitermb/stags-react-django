@@ -49,11 +49,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const setTokenAndUser = (token: string, user: User) => {
     localStorage.setItem("authToken", token);
-    localStorage.setItem("lastUserLogged", user.id_person || "");
+    localStorage.setItem("lastUserLogged", user.id_person);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signin, logout }}>
+    <AuthContext.Provider value={{ user, signin, logout, register }}>
       {children}
     </AuthContext.Provider>
   );
