@@ -28,8 +28,8 @@ export function Header() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
-  const profileImage = auth.user?.image as string
-  const profileName = auth.user?.name.toUpperCase()
+  const profileImage = auth.user?.image as string;
+  const profileName = auth.user?.name.toUpperCase();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -50,7 +50,7 @@ export function Header() {
     }
 
     if (target === "") {
-        setAnchorElNav(null);
+      setAnchorElNav(null);
     }
   };
 
@@ -66,7 +66,7 @@ export function Header() {
     }
 
     if (target === "") {
-        setAnchorElUser(null);
+      setAnchorElUser(null);
     }
   };
 
@@ -130,7 +130,6 @@ export function Header() {
               ))}
             </Menu>
           </Box>
-          <ScaleIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -147,7 +146,7 @@ export function Header() {
             }}
           >
             <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
-              BODY MASS INDEX
+              <ScaleIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
