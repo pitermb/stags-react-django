@@ -24,14 +24,15 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ScaleIcon from "@mui/icons-material/Scale";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 
-const theme = createTheme();
-
-const ref = createRef();
-const Alert = forwardRef<unknown, AlertProps>((props: AlertProps, ref: any) => {
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export function Login() {
+  const theme = createTheme();
   const [open, setOpen] = useState(false);
   const InitialState = { user: "", password: "" };
   const [state, setState] = useState(InitialState);
@@ -107,12 +108,15 @@ export function Login() {
             >
               Realizar Login
             </Button>
-            <Snackbar open={open} autoHideDuration={6000}>
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={() => setOpen(false)}
+            >
               <Alert
                 onClose={() => setOpen(false)}
                 severity="error"
                 sx={{ width: "100%" }}
-                ref={ref}
               >
                 Acesso negado! Usuario ou senha invalido.
               </Alert>

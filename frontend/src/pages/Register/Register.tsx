@@ -28,8 +28,10 @@ import { UserRegister } from "../../types/UserRegister";
 import Base64 from "../../utils/Base64";
 
 const theme = createTheme();
-const ref = createRef();
-const Alert = forwardRef<unknown, AlertProps>((props: AlertProps, ref: any) => {
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -203,12 +205,15 @@ export function Register() {
             >
               Registrar
             </Button>
-            <Snackbar open={open} autoHideDuration={6000}>
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={() => setOpen(false)}
+            >
               <Alert
                 onClose={() => setOpen(false)}
                 severity="error"
                 sx={{ width: "100%" }}
-                ref={ref}
               >
                 Cadastro negado! Informações invalidas.
               </Alert>
