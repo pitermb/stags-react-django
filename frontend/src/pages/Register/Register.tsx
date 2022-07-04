@@ -181,7 +181,6 @@ export function Register() {
                   accept="image/*"
                   id="contained-button-file"
                   name="image"
-                  multiple
                   type="file"
                   onChange={onChangeImage}
                 />

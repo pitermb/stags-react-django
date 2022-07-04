@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import {
   Container,
   CssBaseline,
@@ -8,20 +8,28 @@ import {
   TextField,
   Button,
   Snackbar,
-  Grid,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
+  Badge,
 } from "@mui/material";
 import {
   ChangeEvent,
-  createRef,
   FormEvent,
   forwardRef,
   useContext,
   useState,
+  MouseEvent,
 } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
+import Base64 from "../../utils/Base64";
 
 const theme = createTheme();
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -29,6 +37,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   ref
 ) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+const Input = styled("input")({
+  display: "none",
 });
 
 export function Profile() {
@@ -45,8 +56,17 @@ export function Profile() {
     imc: auth.user?.imc,
     idPerson: auth.user?.id_person,
     image: auth.user?.image as string,
+    showPassword: false,
   };
   const [state, setState] = useState(InitialState);
+  const [profileImage, setProfileImage] = useState(state.image);
+
+  const handleClickShowPassword = () => {
+    setState({
+      ...state,
+      showPassword: !state.showPassword,
+    });
+  };
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -54,6 +74,20 @@ export function Profile() {
       ...state,
       [name]: value,
     });
+  }
+
+  async function onChangeImage(event: ChangeEvent<HTMLInputElement>) {
+    const filesList = event.target?.files || null;
+    if (!filesList) {
+      return false;
+    }
+    const [file] = filesList;
+    const base64Data = await Base64.encode(file);
+    console.log(base64Data);
+    /* setState({
+      ...state,
+      image: { filecontent: base64Data, filename: file.name },
+    }); */
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -74,17 +108,42 @@ export function Profile() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 5,
+            marginTop: 3,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar
-            sx={{ width: 175, height: 175 }}
-            alt="Usuario..."
-            src={state.image}
-          />
+          <Badge
+            overlap="circular"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            badgeContent={
+              <label htmlFor="icon-button-file">
+                <Input
+                  accept="image/*"
+                  id="icon-button-file"
+                  name="image"
+                  type="file"
+                  onChange={onChangeImage}
+                />
+                <IconButton
+                  sx={{ backgroundColor: "deepskyblue", color: "white" }}
+                  color="default"
+                  aria-label="upload picture"
+                  size="large"
+                  component="span"
+                >
+                  <EditIcon />
+                </IconButton>
+              </label>
+            }
+          >
+            <Avatar
+              sx={{ width: 175, height: 175 }}
+              alt="Usuario..."
+              src={profileImage}
+            />
+          </Badge>
           <Typography
             component="h1"
             variant="h4"
@@ -94,88 +153,114 @@ export function Profile() {
           </Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1, mb: 2 }}>
             <TextField
+              size="small"
               margin="normal"
-              disabled
+              InputProps={{
+                readOnly: true,
+              }}
               fullWidth
               name="idPerson"
-              label="ID do Usuario"
+              label="ID (somente leitura):"
               id="idPerson"
-              autoComplete="current-idPerson"
               type="idPerson"
-              onChange={onChange}
               value={state.idPerson}
             />
             <TextField
+              size="small"
               margin="normal"
-              disabled
+              InputProps={{
+                readOnly: true,
+              }}
               fullWidth
               name="user"
-              label="Username do Usuario"
+              label="Username (somente leitura):"
               id="user"
-              autoComplete="current-user"
-              onChange={onChange}
               value={state.user}
             />
             <TextField
+              size="small"
               margin="normal"
               sx={{ width: "22%", mr: 1 }}
               required
               name="age"
-              label="Idade"
+              label="Idade:"
               id="age"
-              autoComplete="current-age"
               type="age"
               onChange={onChange}
               value={state.age}
             />
             <TextField
+              size="small"
               margin="normal"
               sx={{ width: "75%" }}
               required
               name="name"
-              label="Nome do Usuario"
+              label="Nome:"
               id="name"
-              autoComplete="current-name"
               type="name"
               onChange={onChange}
               value={state.name}
             />
             <TextField
+              size="small"
               margin="normal"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">Kg</InputAdornment>
+                ),
+              }}
               sx={{ width: "49%", mr: 1 }}
               required
               name="peso"
-              label="Peso do Usuario em (Kg)"
+              label="Peso:"
               id="peso"
-              autoComplete="current-peso"
               type="peso"
               onChange={onChange}
               value={state.peso}
             />
             <TextField
+              size="small"
               margin="normal"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">M</InputAdornment>
+                ),
+              }}
               sx={{ width: "48%" }}
               required
               name="altura"
-              label="Altura do Usuario em (M)"
+              label="Altura:"
               id="altura"
-              autoComplete="current-altura"
               type="altura"
               onChange={onChange}
               value={state.altura}
             />
-            <TextField
-              margin="normal"
-              required
-              sx={{ width: "99%", mb: 2 }}
-              name="password"
-              label="Alterar senha do Usuario"
-              id="password"
-              autoComplete="current-password"
-              type="password"
-              onChange={onChange}
-              value={state.password}
-            />
+            <FormControl sx={{ width: "99%", mb: 2, mt: 2 }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Alterar senha: *
+              </InputLabel>
+              <OutlinedInput
+                label="Alterar senha: "
+                size="small"
+                required
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {state.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                name="password"
+                id="outlined-adornment-password"
+                type={state.showPassword ? "text" : "password"}
+                onChange={onChange}
+                value={state.password}
+              />
+            </FormControl>
             <Button
               type="submit"
               variant="contained"
