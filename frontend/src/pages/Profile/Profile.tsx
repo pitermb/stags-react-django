@@ -22,7 +22,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import ScaleIcon from "@mui/icons-material/Scale";
 
 const theme = createTheme();
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -34,10 +33,21 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export function Profile() {
   const [open, setOpen] = useState(false);
-  const InitialState = { user: "", password: "" };
-  const [state, setState] = useState(InitialState);
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  console.log(auth.user);
+  const InitialState = {
+    user: auth.user?.user,
+    name: auth.user?.name,
+    password: auth.user?.password,
+    age: auth.user?.age,
+    peso: auth.user?.peso,
+    altura: auth.user?.altura,
+    imc: auth.user?.imc,
+    idPerson: auth.user?.id_person,
+    image: auth.user?.image as string,
+  };
+  const [state, setState] = useState(InitialState);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -50,12 +60,12 @@ export function Profile() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const isLogged = await auth.signin(state.user, state.password);
-    if (isLogged) {
+    //const isUpdate = await auth.signin(state.user, state.password);
+    /* if (isUpdate) {
       navigate("/home");
     } else {
       setOpen(true);
-    }
+    } */
   }
 
   return (
@@ -71,11 +81,13 @@ export function Profile() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <ScaleIcon />
-          </Avatar>
+          <Avatar
+            sx={{ width: 175, height: 175 }}
+            alt="Usuario..."
+            src={state.image}
+          />
           <Typography component="h1" variant="h4" sx={{ mt: 1 }}>
-            BODY MASS INDEX
+            Alterar Dados do Usuario
           </Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
