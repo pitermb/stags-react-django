@@ -16,7 +16,7 @@ class Person(models.Model):
     age = models.IntegerField()
     peso = models.DecimalField(max_digits=5, decimal_places=2)
     altura = models.DecimalField(max_digits=3, decimal_places=2)
-    image = models.ImageField(
+    image = models.FileField(
         upload_to=upload_image_book, blank=True, null=True)
 
     @property

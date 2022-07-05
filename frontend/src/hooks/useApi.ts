@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../types/User";
 import { UserRegister } from "../types/UserRegister";
 import { UserUpdateRequest } from "../types/UserUpdate";
 
@@ -70,11 +71,13 @@ export const useApi = () => ({
       const { data: token } = await api.post(`/token/`, {
         ...superuser,
       });
-      const data = await api.put(`/api/person/${user.id_person}`, user, {
-        headers: { Authorization: "Bearer " + token.access },
+      const {data: dataUpdate} = await api.patch(`/api/person/${user.id_person}/`, user, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token.access,
+        },
       });
-
-      return;
+      return dataUpdate as Promise<User>;
     } catch {
       alert("Deu ruim na requisição...");
     }

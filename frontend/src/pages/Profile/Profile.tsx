@@ -46,7 +46,6 @@ export function Profile() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
-  const [profileImage] = useState(auth.user?.image as string);
   const [showPassword, setShowPassword] = useState(false);
   const InitialState = {
     id_person: auth.user?.id_person as string,
@@ -57,7 +56,6 @@ export function Profile() {
     peso: auth.user?.peso as string,
     altura: auth.user?.altura as string,
     imc: auth.user?.imc as number,
-    image: "",
   };
   const [state, setState] = useState<UserUpdateRequest>(InitialState);
 
@@ -76,7 +74,6 @@ export function Profile() {
     }
     const [file] = filesList;
     const base64Data = await Base64.encode(file);
-    console.log(base64Data);
     setState({
       ...state,
       image: { filecontent: base64Data, filename: file.name },
@@ -85,16 +82,9 @@ export function Profile() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    console.log(state.image === "");
-
-    if (state.image === "") {
-      setState({ ...state, image: auth.user?.image as string });
-    }
-
-    console.log(state);
-    console.log(auth.user);
     const isUpdate = await auth.update(state);
+    auth.setUser(isUpdate || null);
+
     /* if (isUpdate) {
       navigate("/home");
     } else {
@@ -142,7 +132,7 @@ export function Profile() {
             <Avatar
               sx={{ width: 175, height: 175 }}
               alt="Usuario..."
-              src={profileImage}
+              src={(auth.user?.image as string) || ""}
             />
           </Badge>
           <Typography
@@ -235,7 +225,7 @@ export function Profile() {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={()=>setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword(!showPassword)}
                       edge="end"
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}

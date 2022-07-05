@@ -29,7 +29,7 @@ class LGPDBase64SingleFileSerializer(serializers.FileField):
 
 
 class PersonSerializer(serializers.ModelSerializer):
-    image = LGPDBase64SingleFileSerializer()
+    image = LGPDBase64SingleFileSerializer(allow_null=True)
 
     class Meta:
         model = Person

@@ -64,11 +64,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const update = async (user: UserUpdateRequest) => {
     const data = await api.update(user);
-    return false
+    return data
   }
 
   return (
-    <AuthContext.Provider value={{ user, signin, logout, register, update }}>
+    <AuthContext.Provider value={{ user, signin, logout, register, update, setUser }}>
       {children}
     </AuthContext.Provider>
   );

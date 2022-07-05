@@ -1,8 +1,13 @@
 from django.urls import path
+from django.urls.conf import include
 from . import views
+from rest_framework.routers import DefaultRouter
 
 app_name = 'person'
 
+router = DefaultRouter()
+router.register('person', views.PersonListAPIView)
+
 urlpatterns = [
-    path('person/', views.PersonListAPIView.as_view(), name='person_list')
+    path('', include(router.urls))
 ]

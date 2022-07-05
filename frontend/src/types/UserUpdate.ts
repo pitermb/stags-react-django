@@ -19,5 +19,5 @@ export type UserUpdateRequest = {
   peso: string;
   altura: string;
   imc: number;
-  image: string | { filecontent: string; filename: string };
+  image?: string | { filecontent: string; filename: string };
 };
