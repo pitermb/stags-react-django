@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useApi } from "../../hooks/useApi";
 import { User } from "../../types/User";
 import { UserRegister } from "../../types/UserRegister";
+import { UserUpdateRequest } from "../../types/UserUpdate";
 import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
@@ -61,8 +62,13 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     return false;
   };
 
+  const update = async (user: UserUpdateRequest) => {
+    const data = await api.update(user);
+    return false
+  }
+
   return (
-    <AuthContext.Provider value={{ user, signin, logout, register }}>
+    <AuthContext.Provider value={{ user, signin, logout, register, update }}>
       {children}
     </AuthContext.Provider>
   );

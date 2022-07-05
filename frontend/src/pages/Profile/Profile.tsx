@@ -48,7 +48,9 @@ export function Profile() {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [profileImage] = useState(auth.user?.image as string);
+  const [showPassword, setShowPassword] = useState(false);
   const InitialState = {
+    id_person: auth.user?.id_person,
     user: auth.user?.user,
     name: auth.user?.name,
     password: auth.user?.password,
@@ -57,16 +59,8 @@ export function Profile() {
     altura: auth.user?.altura,
     imc: auth.user?.imc,
     image: "",
-    showPassword: false,
   };
   const [state, setState] = useState<UserUpdate>(InitialState);
-
-  const handleClickShowPassword = () => {
-    setState({
-      ...state,
-      showPassword: !state.showPassword,
-    });
-  };
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -96,12 +90,12 @@ export function Profile() {
     console.log(state.image === "");
 
     if (state.image === "") {
-      setState({...state, image: auth.user?.image as string})
+      setState({ ...state, image: auth.user?.image as string });
     }
 
     console.log(state);
     console.log(auth.user);
-    //const isUpdate = await auth.signin(state.user, state.password);
+    //const isUpdate = await auth.update(state);
     /* if (isUpdate) {
       navigate("/home");
     } else {
@@ -242,16 +236,16 @@ export function Profile() {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
+                      onClick={()=>setShowPassword(!showPassword)}
                       edge="end"
                     >
-                      {state.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
                 name="password"
                 id="outlined-adornment-password"
-                type={state.showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 onChange={onChange}
                 value={state.password}
               />

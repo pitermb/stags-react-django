@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UserRegister } from "../types/UserRegister";
+import { UserUpdateRequest } from "../types/UserUpdate";
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_API,
@@ -60,6 +61,20 @@ export const useApi = () => ({
         },
       });
       return true;
+    } catch {
+      alert("Deu ruim na requisição...");
+    }
+  },
+  update: async (user: UserUpdateRequest) => {
+    try {
+      const { data: token } = await api.post(`/token/`, {
+        ...superuser,
+      });
+      const data = await api.put(`/api/person/${user.id_person}`, user, {
+        headers: { Authorization: "Bearer " + token.access },
+      });
+
+      return;
     } catch {
       alert("Deu ruim na requisição...");
     }
