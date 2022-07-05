@@ -29,7 +29,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 import Base64 from "../../utils/Base64";
-import { UserUpdate, UserUpdateRequest } from "../../types/UserUpdate";
+import { UserUpdateRequest } from "../../types/UserUpdate";
 
 const theme = createTheme();
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
