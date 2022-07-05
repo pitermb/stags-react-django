@@ -30,6 +30,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 import Base64 from "../../utils/Base64";
+import { UserUpdate } from "../../types/UserUpdate";
 
 const theme = createTheme();
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -46,6 +47,7 @@ export function Profile() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const [profileImage] = useState(auth.user?.image as string);
   const InitialState = {
     user: auth.user?.user,
     name: auth.user?.name,
@@ -55,11 +57,13 @@ export function Profile() {
     altura: auth.user?.altura,
     imc: auth.user?.imc,
     idPerson: auth.user?.id_person,
-    image: auth.user?.image as string,
+    image: {
+      filecontent: "",
+      filename: "",
+    },
     showPassword: false,
   };
-  const [state, setState] = useState(InitialState);
-  const [profileImage, setProfileImage] = useState(state.image);
+  const [state, setState] = useState<UserUpdate>(InitialState);
 
   const handleClickShowPassword = () => {
     setState({
@@ -84,15 +88,23 @@ export function Profile() {
     const [file] = filesList;
     const base64Data = await Base64.encode(file);
     console.log(base64Data);
-    /* setState({
+    setState({
       ...state,
       image: { filecontent: base64Data, filename: file.name },
-    }); */
+    });
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    console.log(state.image == "")
+
+    /* if (state.image == "") {
+      setState({...state, image: auth.user?.image as string})
+    } */
+
+    console.log(state)
+    console.log(auth.user)
     //const isUpdate = await auth.signin(state.user, state.password);
     /* if (isUpdate) {
       navigate("/home");
