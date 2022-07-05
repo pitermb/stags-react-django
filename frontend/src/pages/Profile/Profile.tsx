@@ -21,7 +21,6 @@ import {
   forwardRef,
   useContext,
   useState,
-  MouseEvent,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
@@ -30,7 +29,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 import Base64 from "../../utils/Base64";
-import { UserUpdate } from "../../types/UserUpdate";
+import { UserUpdate, UserUpdateRequest } from "../../types/UserUpdate";
 
 const theme = createTheme();
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -50,17 +49,17 @@ export function Profile() {
   const [profileImage] = useState(auth.user?.image as string);
   const [showPassword, setShowPassword] = useState(false);
   const InitialState = {
-    id_person: auth.user?.id_person,
-    user: auth.user?.user,
-    name: auth.user?.name,
-    password: auth.user?.password,
-    age: auth.user?.age,
-    peso: auth.user?.peso,
-    altura: auth.user?.altura,
-    imc: auth.user?.imc,
+    id_person: auth.user?.id_person as string,
+    user: auth.user?.user as string,
+    name: auth.user?.name as string,
+    password: auth.user?.password as string,
+    age: auth.user?.age as number,
+    peso: auth.user?.peso as string,
+    altura: auth.user?.altura as string,
+    imc: auth.user?.imc as number,
     image: "",
   };
-  const [state, setState] = useState<UserUpdate>(InitialState);
+  const [state, setState] = useState<UserUpdateRequest>(InitialState);
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -95,7 +94,7 @@ export function Profile() {
 
     console.log(state);
     console.log(auth.user);
-    //const isUpdate = await auth.update(state);
+    const isUpdate = await auth.update(state);
     /* if (isUpdate) {
       navigate("/home");
     } else {
