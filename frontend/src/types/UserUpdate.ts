@@ -1,5 +1,4 @@
 export type UserUpdate = {
-    idPerson: string | undefined;
     user: string | undefined;
     name: string | undefined;
     password: string | undefined;

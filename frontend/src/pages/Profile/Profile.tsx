@@ -56,11 +56,7 @@ export function Profile() {
     peso: auth.user?.peso,
     altura: auth.user?.altura,
     imc: auth.user?.imc,
-    idPerson: auth.user?.id_person,
-    image: {
-      filecontent: "",
-      filename: "",
-    },
+    image: "",
     showPassword: false,
   };
   const [state, setState] = useState<UserUpdate>(InitialState);
@@ -97,14 +93,14 @@ export function Profile() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log(state.image == "")
+    console.log(state.image === "");
 
-    /* if (state.image == "") {
+    if (state.image === "") {
       setState({...state, image: auth.user?.image as string})
-    } */
+    }
 
-    console.log(state)
-    console.log(auth.user)
+    console.log(state);
+    console.log(auth.user);
     //const isUpdate = await auth.signin(state.user, state.password);
     /* if (isUpdate) {
       navigate("/home");
@@ -164,19 +160,6 @@ export function Profile() {
             Alterar Dados
           </Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1, mb: 2 }}>
-            <TextField
-              size="small"
-              margin="normal"
-              InputProps={{
-                readOnly: true,
-              }}
-              fullWidth
-              name="idPerson"
-              label="ID (somente leitura):"
-              id="idPerson"
-              type="idPerson"
-              value={state.idPerson}
-            />
             <TextField
               size="small"
               margin="normal"
