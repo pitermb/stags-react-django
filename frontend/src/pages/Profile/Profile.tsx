@@ -84,12 +84,6 @@ export function Profile() {
     event.preventDefault();
     const isUpdate = await auth.update(state);
     auth.setUser(isUpdate || null);
-
-    /* if (isUpdate) {
-      navigate("/home");
-    } else {
-      setOpen(true);
-    } */
   }
 
   return (
