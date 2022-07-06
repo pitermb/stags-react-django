@@ -23,11 +23,11 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import EditIcon from "@mui/icons-material/Edit";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../contexts/auth/AuthContext";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import EditIcon from "@mui/icons-material/Edit";
 import Base64 from "../../utils/Base64";
 import { UserUpdateRequest } from "../../types/UserUpdate";
 
