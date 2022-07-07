@@ -17,19 +17,15 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { Header } from "../../components/Header/Header";
-
-import green from "@mui/material/colors/green";
-const mtoAbaixoPeso = green[900];
-const abaixoPeso = green[700];
-const pesoNormal = green[500];
-
-import orange from "@mui/material/colors/orange";
-const acimaPeso = orange[500];
-const obesidadeUm = orange[800];
-
-import red from "@mui/material/colors/red";
-const obesidadeDois = red[500];
-const obesidadeTres = red[900];
+import {
+  mtoAbaixoPeso,
+  abaixoPeso,
+  pesoNormal,
+  acimaPeso,
+  obesidadeUm,
+  obesidadeDois,
+  obesidadeTres,
+} from "../../colors/Colors";
 
 const theme = createTheme();
 const Item = styled(Paper)(({ theme }) => ({
@@ -44,6 +40,8 @@ export function Home() {
   const auth = useContext(AuthContext);
   const [slider, setSlider] = useState(auth.user?.imc);
   const [sliderColor, setSliderColor] = useState<string>();
+  const [content, setContent] = useState<string>();
+  const [content2, setContent2] = useState<string>();
 
   useEffect(() => {
     if ((slider as number) >= 40) {
@@ -66,6 +64,8 @@ export function Home() {
     }
     if ((slider as number) < 17) {
       setSliderColor(mtoAbaixoPeso);
+      setContent("Fadiga")
+      setContent2("Fadiga, stress, ansiedade")
     }
   }, [slider]);
 
@@ -108,17 +108,17 @@ export function Home() {
             <Item>
               <Grid container>
                 <Grid item xs>
-                  Oi
+                  {content}
                 </Grid>
                 <Divider orientation="vertical" flexItem>
                   <Chip
-                    label={`Oi`}
+                    label={`Info:`}
                     sx={{ backgroundColor: sliderColor, color: "white" }}
                     icon={<FaceIcon />}
                   />
                 </Divider>
                 <Grid item xs>
-                  Oi 2
+                  {content2}
                 </Grid>
               </Grid>
             </Item>
