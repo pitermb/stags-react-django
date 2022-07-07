@@ -159,48 +159,62 @@ export function Dashboard() {
           </Stack>
           <Stack>
             <Item>
-              <Typography variant="h4" gutterBottom component="div">
-                Como melhorar o resultado do IMC
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                Quando o resultado do IMC não é o ideal, existem alguns
-                cuidados, principalmente com a alimentação, que podem ajudar a
-                atingir o valor ideal:
-              </Typography>
-              <Typography variant="h4" gutterBottom component="div">
-                1. O que fazer para baixar o IMC
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                Se o resultado do IMC estiver acima do ideal e a pessoa não for
-                muito musculosa, nem atleta, pode indicar que é preciso
-                emagrecer, eliminando o acúmulo de gordura, que contribui para o
-                peso alto. Para isso deve-se comer somente alimentos ricos em
-                vitaminas e minerais, tendo o cuidado de diminuir o consumo de
-                alimentos industrializados e ricos em gordura, como massa
-                folheada, bolos, biscoitos recheados e salgadinhos, por exemplo.
-                Para que os resultados sejam alcançados ainda mais rápido é
-                aconselhado fazer exercícios para aumentar o gasto calórico e
-                aumentar o metabolismo. Recorrer a chás e suplementos naturais
-                pode ser um estímulo para ajudar a emagrecer de forma mais
-                rápida e saudável, sem ter que passar fome. Alguns exemplos são
-                o chá de hibisco ou o chá de gengibre com canela, mas um
-                nutricionista poderá indicar outros que sejam mais adequados às
-                necessidades de cada pessoa Veja mais sobre reeducação alimentar
-                para emagrecer de vez de forma saudável.
-              </Typography>
-              <Typography variant="h4" gutterBottom component="div">
-                2. O que fazer para aumentar o IMC
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                Se o resultado do IMC estiver abaixo do ideal, o que se deve
-                fazer é aumentar a ingestão de alimentos ricos em vitaminas e
-                minerais de boa qualidade, mas sem cair no erro de comer
-                alimentos processados e ricos em gordura trans. Pizzas,
-                frituras, cachorro quente e hambúrguer não são os melhores
-                alimentos para quem precisa aumentar o peso de forma saudável,
-                porque este tipo de gordura pode se acumular no interior das
-                artérias, aumentando o risco de doença cardíaca.
-              </Typography>
+              <Stack sx={{ mt: 2 }}>
+                <Item>
+                  <Typography variant="h4" gutterBottom component="div">
+                    Como melhorar o resultado do IMC
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Quando o resultado do IMC não é o ideal, existem alguns
+                    cuidados, principalmente com a alimentação, que podem ajudar
+                    a atingir o valor ideal:
+                  </Typography>
+                </Item>
+              </Stack>
+              <Stack sx={{ mt: 2 }}>
+                <Item>
+                  <Typography variant="h4" gutterBottom component="div">
+                    1. O que fazer para baixar o IMC
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Se o resultado do IMC estiver acima do ideal e a pessoa não
+                    for muito musculosa, nem atleta, pode indicar que é preciso
+                    emagrecer, eliminando o acúmulo de gordura, que contribui
+                    para o peso alto. Para isso deve-se comer somente alimentos
+                    ricos em vitaminas e minerais, tendo o cuidado de diminuir o
+                    consumo de alimentos industrializados e ricos em gordura,
+                    como massa folheada, bolos, biscoitos recheados e
+                    salgadinhos, por exemplo. Para que os resultados sejam
+                    alcançados ainda mais rápido é aconselhado fazer exercícios
+                    para aumentar o gasto calórico e aumentar o metabolismo.
+                    Recorrer a chás e suplementos naturais pode ser um estímulo
+                    para ajudar a emagrecer de forma mais rápida e saudável, sem
+                    ter que passar fome. Alguns exemplos são o chá de hibisco ou
+                    o chá de gengibre com canela, mas um nutricionista poderá
+                    indicar outros que sejam mais adequados às necessidades de
+                    cada pessoa Veja mais sobre reeducação alimentar para
+                    emagrecer de vez de forma saudável.
+                  </Typography>
+                </Item>
+              </Stack>
+              <Stack sx={{ mt: 2 }}>
+                <Item>
+                  <Typography variant="h4" gutterBottom component="div">
+                    2. O que fazer para aumentar o IMC
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Se o resultado do IMC estiver abaixo do ideal, o que se deve
+                    fazer é aumentar a ingestão de alimentos ricos em vitaminas
+                    e minerais de boa qualidade, mas sem cair no erro de comer
+                    alimentos processados e ricos em gordura trans. Pizzas,
+                    frituras, cachorro quente e hambúrguer não são os melhores
+                    alimentos para quem precisa aumentar o peso de forma
+                    saudável, porque este tipo de gordura pode se acumular no
+                    interior das artérias, aumentando o risco de doença
+                    cardíaca.
+                  </Typography>
+                </Item>
+              </Stack>
             </Item>
           </Stack>
         </Box>
