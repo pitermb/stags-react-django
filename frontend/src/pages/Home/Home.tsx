@@ -175,6 +175,7 @@ export function Home() {
               </Grid>
             </Item>
           </Stack>
+          
         </Box>
       </Container>
     </ThemeProvider>
