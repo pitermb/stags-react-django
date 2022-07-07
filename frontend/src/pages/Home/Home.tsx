@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { Header } from "../../components/Header/Header";
 import {
-  mtoAbaixoPeso,
   abaixoPeso,
   pesoNormal,
   acimaPeso,
@@ -46,26 +45,35 @@ export function Home() {
   useEffect(() => {
     if ((slider as number) >= 40) {
       setSliderColor(obesidadeTres);
+      setContent("Obesidade grau III");
+      setContent2(
+        "Refluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC"
+      );
     }
     if ((slider as number) < 40) {
       setSliderColor(obesidadeDois);
+      setContent("Obesidade grau II");
+      setContent2("Apneia do sono, falta de ar");
     }
     if ((slider as number) < 35) {
       setSliderColor(obesidadeUm);
+      setContent("Obesidade grau I");
+      setContent2("Diabetes, angina, infarto, aterosclerose");
     }
     if ((slider as number) < 30) {
       setSliderColor(acimaPeso);
+      setContent("Sobrepeso");
+      setContent2("Fadiga, má circulação, varizes");
     }
     if ((slider as number) < 25) {
       setSliderColor(pesoNormal);
+      setContent("Peso normal	");
+      setContent2("Menor risco de doenças cardíacas e vasculares");
     }
     if ((slider as number) < 18.5) {
       setSliderColor(abaixoPeso);
-    }
-    if ((slider as number) < 17) {
-      setSliderColor(mtoAbaixoPeso);
-      setContent("Fadiga")
-      setContent2("Fadiga, stress, ansiedade")
+      setContent("Magreza");
+      setContent2("Fadiga, stress, ansiedade");
     }
   }, [slider]);
 
@@ -88,9 +96,19 @@ export function Home() {
         >
           <Stack sx={{ width: "100%", mb: 2 }}>
             <Item>
+              <Item>
+                <h2> Tabela de resultados de IMC</h2>
+                Cada resultado do IMC deve ser avaliado por um profissional de
+                saúde. No entanto, a tabela a seguir indica os possíveis
+                resultados do IMC, de acordo com a Organização Mundial da Saúde,
+                sendo que o IMC entre 18,5 a 24,9 representa o peso ideal e o
+                menor risco de algumas doenças.
+              </Item>
               <Divider sx={{ margin: 1 }}>
                 <Chip
-                  label={`Progresso da barra de IMC: ${slider}`}
+                  label={`Progresso da barra de IMC: ${(
+                    slider as number
+                  ).toFixed(2)}`}
                   sx={{ backgroundColor: sliderColor, color: "white" }}
                 />
               </Divider>
@@ -106,19 +124,18 @@ export function Home() {
           </Stack>
           <Stack sx={{ width: "100%" }}>
             <Item>
-              <Grid container>
-                <Grid item xs>
-                  {content}
+              <Grid container columns={11}>
+                <Grid item xs={6}>
+                  <Divider orientation="vertical">
+                    <Chip
+                      label={content}
+                      sx={{ backgroundColor: sliderColor, color: "white" }}
+                      icon={<FaceIcon />}
+                    />
+                  </Divider>
                 </Grid>
-                <Divider orientation="vertical" flexItem>
-                  <Chip
-                    label={`Info:`}
-                    sx={{ backgroundColor: sliderColor, color: "white" }}
-                    icon={<FaceIcon />}
-                  />
-                </Divider>
-                <Grid item xs>
-                  {content2}
+                <Grid item xs={5}>
+                  <Item>{content2}</Item>
                 </Grid>
               </Grid>
             </Item>
