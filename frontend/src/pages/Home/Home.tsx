@@ -7,6 +7,7 @@ import {
   Divider,
   Grid,
   Paper,
+  Skeleton,
   Slider,
   Stack,
   Typography,
@@ -96,13 +97,38 @@ export function Home() {
         >
           <Stack sx={{ width: "100%", mb: 2 }}>
             <Item>
+              <Typography variant="h4" gutterBottom component="div">
+                IMC: o que é?
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                O IMC é um cálculo simples que permite avaliar se a pessoa está
+                dentro do peso que é considerado ideal para a sua altura. Também
+                conhecido como Índice de Massa Corporal, o IMC é uma fórmula
+                utilizada por vários profissionais de saúde, incluindo médicos,
+                enfermeiros e nutricionistas, para saber, de uma forma rápida,
+                se a pessoa precisa ganhar ou perder peso. Embora seja uma
+                ferramenta muito comum, o IMC não é considerada a forma mais
+                exata de avaliar o peso, já que não leva em consideração a
+                composição corporal. Por isso, é comum que no caso de atletas
+                (que possuem uma maior quantidade de massa muscular) seja
+                aconselhado o uso de outras técnicas, como a bioimpedância, para
+                uma avaliação mais detalhada do peso.
+              </Typography>
+            </Item>
+          </Stack>
+          <Stack sx={{ width: "100%", mb: 2 }}>
+            <Item>
               <Item>
-                <h2> Tabela de resultados de IMC</h2>
-                Cada resultado do IMC deve ser avaliado por um profissional de
-                saúde. No entanto, a tabela a seguir indica os possíveis
-                resultados do IMC, de acordo com a Organização Mundial da Saúde,
-                sendo que o IMC entre 18,5 a 24,9 representa o peso ideal e o
-                menor risco de algumas doenças.
+                <Typography variant="h4" gutterBottom component="div">
+                  Tabela de resultados de IMC
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Cada resultado do IMC deve ser avaliado por um profissional de
+                  saúde. No entanto, o card a seguir indica os possíveis
+                  resultados do IMC, de acordo com a Organização Mundial da
+                  Saúde, sendo que o IMC entre 18,5 a 24,9 representa o peso
+                  ideal e o menor risco de algumas doenças.
+                </Typography>
               </Item>
               <Divider sx={{ margin: 1 }}>
                 <Chip
@@ -124,18 +150,27 @@ export function Home() {
           </Stack>
           <Stack sx={{ width: "100%" }}>
             <Item>
+              <Typography variant="caption" gutterBottom component="div">
+                Arraste a barra acima para mudar o valor do IMC
+              </Typography>
               <Grid container columns={11}>
                 <Grid item xs={6}>
                   <Divider orientation="vertical">
-                    <Chip
-                      label={content}
-                      sx={{ backgroundColor: sliderColor, color: "white" }}
-                      icon={<FaceIcon />}
-                    />
+                    <Typography variant="body1" gutterBottom component="div">
+                      <Chip
+                        label={content}
+                        sx={{ backgroundColor: sliderColor, color: "white" }}
+                        icon={<FaceIcon />}
+                      />
+                    </Typography>
                   </Divider>
                 </Grid>
                 <Grid item xs={5}>
-                  <Item>{content2}</Item>
+                  <Item>
+                    <Typography variant="body1" gutterBottom component="div">
+                      {content2}
+                    </Typography>
+                  </Item>
                 </Grid>
               </Grid>
             </Item>
