@@ -26,6 +26,7 @@ import {
   obesidadeDois,
   obesidadeTres,
 } from "../../colors/Colors";
+import HomeTable from "../../components/Table/HomeTable";
 
 const theme = createTheme();
 const Item = styled(Paper)(({ theme }) => ({
@@ -175,7 +176,7 @@ export function Home() {
               </Grid>
             </Item>
           </Stack>
-          
+          <HomeTable/>
         </Box>
       </Container>
     </ThemeProvider>

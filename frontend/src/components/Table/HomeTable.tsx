@@ -1,52 +1,57 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
+function createData(imc: string, classificacao: string, consequencia: string) {
+  return { imc, classificacao, consequencia };
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
+  createData("Menor que 18,5", "Magreza", "Fadiga, stress, ansiedade"),
+  createData(
+    "18,5 a 24,9",
+    "Peso normal",
+    "Menor risco de doenças cardíacas e vasculares"
+  ),
+  createData("25 a 29,9", "Sobrepeso", "Fadiga, má circulação, varizes"),
+  createData(
+    "30 a 34,9",
+    "Obesidade grau I",
+    "Diabetes, angina, infarto, aterosclerose"
+  ),
+  createData("35 a 40", "Obesidade grau II", "Apneia do sono, falta de ar"),
+  createData(
+    "Maior que 40",
+    "Obesidade grau III",
+    "Refluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC"
+  ),
 ];
 
-export default function AcccessibleTable() {
+export default function HomeTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <caption>A basic table example with a caption</caption>
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>IMC&nbsp;(kg/m²)</TableCell>
+            <TableCell align="right">Classificação</TableCell>
+            <TableCell align="right">Consequências para a saúde</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.imc}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.imc}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.classificacao}</TableCell>
+              <TableCell align="right">{row.consequencia}</TableCell>
             </TableRow>
           ))}
         </TableBody>
