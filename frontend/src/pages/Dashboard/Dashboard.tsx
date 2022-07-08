@@ -27,6 +27,8 @@ import {
   obesidadeTres,
 } from "../../colors/Colors";
 
+import { handleSliderBar } from "../../utils/SliderBar";
+
 const theme = createTheme();
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -43,42 +45,11 @@ export function Dashboard() {
   const [content, setContent] = useState<string>();
   const [content2, setContent2] = useState<string>();
 
-  useEffect(() => {
-    if ((slider as number) >= 40) {
-      setSliderColor(obesidadeTres);
-      setContent("Obesidade grau III");
-      setContent2(
-        "Refluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC"
-      );
-    }
-    if ((slider as number) < 40) {
-      setSliderColor(obesidadeDois);
-      setContent("Obesidade grau II");
-      setContent2("Apneia do sono, falta de ar");
-    }
-    if ((slider as number) < 35) {
-      setSliderColor(obesidadeUm);
-      setContent("Obesidade grau I");
-      setContent2("Diabetes, angina, infarto, aterosclerose");
-    }
-    if ((slider as number) < 30) {
-      setSliderColor(acimaPeso);
-      setContent("Sobrepeso");
-      setContent2("Fadiga, má circulação, varizes");
-    }
-    if ((slider as number) < 25) {
-      setSliderColor(pesoNormal);
-      setContent("Peso normal	");
-      setContent2("Menor risco de doenças cardíacas e vasculares");
-    }
-    if ((slider as number) < 18.5) {
-      setSliderColor(abaixoPeso);
-      setContent("Magreza");
-      setContent2("Fadiga, stress, ansiedade");
-    }
-  }, [slider]);
-
   const handleChange = (event: Event, newValue: number | number[]) => {
+    const { sliderColor, content, content2 } = handleSliderBar(newValue);
+    setSliderColor(sliderColor);
+    setContent(content);
+    setContent2(content2);
     setSlider(newValue as number);
   };
   return (

@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import {
   Box,
-  Chip,
+  Button,
   Container,
   CssBaseline,
   Divider,
@@ -15,17 +15,13 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { Header } from "../../components/Header/Header";
-
 import HomeTable from "../../components/Table/HomeTable";
-
-const theme = createTheme();
 import { Item } from "../../components/Item/ItemHome";
 
+const theme = createTheme();
+
 export function Home() {
-  const auth = useContext(AuthContext);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {};
-
+  const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -78,7 +74,20 @@ export function Home() {
           </Stack>
           <Stack sx={{ width: "100%", mb: 2 }}>
             <Item>
-              
+              <Typography variant="h5" gutterBottom component="div">
+                Você pode verificar seu IMC em sua pagina Dashboard
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                Clique no botão abaixo para se redicionar ao Dashboard
+              </Typography>
+              <Button
+                type="submit"
+                onClick={() => navigate("/dashboard")}
+                variant="contained"
+                sx={{ mt: 1, mb: 2, width: "30%" }}
+              >
+                Ir para seu Dashboard
+              </Button>
             </Item>
           </Stack>
         </Box>
