@@ -1,11 +1,4 @@
-import {
-  FormEvent,
-  useState,
-  createRef,
-  forwardRef,
-  ChangeEvent,
-  useContext,
-} from "react";
+import { FormEvent, useState, ChangeEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -19,17 +12,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ScaleIcon from "@mui/icons-material/Scale";
 import { AuthContext } from "../../contexts/auth/AuthContext";
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import { Alert } from "../../components/Alert/AlertProfile";
 
 export function Login() {
   const theme = createTheme();
@@ -49,7 +35,6 @@ export function Login() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     const isLogged = await auth.signin(state.user, state.password);
     if (isLogged) {
       navigate("/home");

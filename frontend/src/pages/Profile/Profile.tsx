@@ -1,4 +1,4 @@
-import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Container,
   CssBaseline,
@@ -15,32 +15,18 @@ import {
   FormControl,
   Badge,
 } from "@mui/material";
-import {
-  ChangeEvent,
-  FormEvent,
-  forwardRef,
-  useContext,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import EditIcon from "@mui/icons-material/Edit";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Header } from "../../components/Header/Header";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import Base64 from "../../utils/Base64";
 import { UserUpdateRequest } from "../../types/UserUpdate";
+import { Alert } from "../../components/Alert/AlertProfile";
+import { Input } from "../../components/Input/InputProfile";
 
 const theme = createTheme();
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-const Input = styled("input")({
-  display: "none",
-});
 
 export function Profile() {
   const [open, setOpen] = useState(false);
@@ -243,6 +229,7 @@ export function Profile() {
             </Button>{" "}
             <Button
               type="submit"
+              onClick={() => navigate("/home")}
               variant="outlined"
               color="error"
               sx={{ width: "50%" }}

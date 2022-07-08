@@ -1,34 +1,21 @@
-import { useContext, useEffect } from "react";
 import {
   Box,
   Button,
   Container,
   CssBaseline,
   Divider,
-  Grid,
   Stack,
   Typography,
 } from "@mui/material";
-import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
-import FaceIcon from "@mui/icons-material/Face";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/auth/AuthContext";
 import { Header } from "../../components/Header/Header";
 import HomeTable from "../../components/Table/HomeTable";
 import { Item } from "../../components/Item/ItemHome";
-
 const theme = createTheme();
 
 export function Home() {
-  const auth = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const handleGoDashboard = () => {
-    navigate("/dashboard");
-
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -89,7 +76,7 @@ export function Home() {
               </Typography>
               <Button
                 type="submit"
-                onClick={handleGoDashboard}
+                onClick={() => navigate("/dashboard")}
                 variant="contained"
                 sx={{ mt: 1, mb: 1, width: "30%" }}
               >

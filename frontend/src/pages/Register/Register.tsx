@@ -1,7 +1,6 @@
 import {
   FormEvent,
   useState,
-  forwardRef,
   ChangeEvent,
   useContext,
 } from "react";
@@ -17,26 +16,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ScaleIcon from "@mui/icons-material/Scale";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { UserRegister } from "../../types/UserRegister";
 import Base64 from "../../utils/Base64";
-
-const theme = createTheme();
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import { Alert } from "../../components/Alert/AlertRegister";
+import { Input } from "../../components/Input/InputRegister";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-const Input = styled("input")({
-  display: "none",
-});
+const theme = createTheme();
 
 export function Register() {
   const InitialState = {
