@@ -21,7 +21,14 @@ import { Item } from "../../components/Item/ItemHome";
 const theme = createTheme();
 
 export function Home() {
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const handleGoDashboard = () => {
+    navigate("/dashboard");
+
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -82,9 +89,9 @@ export function Home() {
               </Typography>
               <Button
                 type="submit"
-                onClick={() => navigate("/dashboard")}
+                onClick={handleGoDashboard}
                 variant="contained"
-                sx={{ mt: 1, mb: 2, width: "30%" }}
+                sx={{ mt: 1, mb: 1, width: "30%" }}
               >
                 Ir para seu Dashboard
               </Button>
