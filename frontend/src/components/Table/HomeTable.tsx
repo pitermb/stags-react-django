@@ -1,4 +1,3 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,6 +5,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
+import { headTable } from "../../colors/Colors";
 
 function createData(imc: string, classificacao: string, consequencia: string) {
   return { imc, classificacao, consequencia };
@@ -35,10 +36,14 @@ const rows = [
 export default function HomeTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        <caption>A basic table example with a caption</caption>
+      <Table sx={{ minWidth: 450 }} aria-label="caption table">
+        <caption>
+          <Typography variant="caption" gutterBottom component="div">
+            Tabela informativa sobre o IMC
+          </Typography>
+        </caption>
         <TableHead>
-          <TableRow>
+          <TableRow sx={{ backgroundColor: headTable }}>
             <TableCell>IMC&nbsp;(kg/m²)</TableCell>
             <TableCell align="right">Classificação</TableCell>
             <TableCell align="right">Consequências para a saúde</TableCell>
